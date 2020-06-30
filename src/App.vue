@@ -4,18 +4,25 @@
  * @Author: sueRimn
  * @Date: 2020-06-28 23:06:29
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-06-28 23:55:39
+ * @LastEditTime: 2020-07-01 00:45:38
 --> 
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <router-view></router-view>
+    <tab-bar-item></tab-bar-item>
+  </div>
 </template>
 
 <script>
+import TabBarItem from 'content/MainTabBar'
 export default {
-  name:'app'
+  name:'app',
+  components:{
+    TabBarItem
+    }
 }
 </script>
 
-<style lang="scss"> 
-@import url("./assets/css/base.css");
+<style> 
+@import url("assets/css/base.css");
 </style>

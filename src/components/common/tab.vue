@@ -1,0 +1,54 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-06-16 23:46:46
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-07-01 00:29:34
+--> 
+<!--  -->
+<template>
+    <div id='tab-bar'>
+        <slot name='news'></slot>
+    </div>
+</template>
+
+<script>
+//这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
+//例如：import 《组件名称》 from '《组件路径》';
+
+export default {
+//import引入的组件需要注入到对象中才能使用
+components: {},
+data() {
+//这里存放数据
+return {
+    bar:['首页','分类','购物车','我的'],
+};
+},
+//监听属性 类似于data概念
+computed: {},
+//监控data中的数据变化
+watch: {},
+//方法集合
+methods: {
+
+}
+}
+</script>
+<style >
+
+#tab-bar{
+  display: flex;
+  background-color:#f6f6f6;
+  position:fixed;
+  left: 0;
+  right:0;
+  top:5;
+  bottom:0;
+  box-shadow:0 -3px 1px rgba(100,100,100,0.1);
+}
+
+
+
+</style>
