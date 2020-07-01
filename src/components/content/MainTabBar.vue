@@ -8,8 +8,7 @@
 --> 
 <!--  -->
 <template>
-<div class=''>
-    <tab-bar slot="news">
+    <tab-bar>
        <tab-bar-item path='/home' activeColor='red'>
          <img src="~assets/img/tabbar/shouye.png" slot="img" alt=''>
          <img src="~assets/img/tabbar/shouyeActive.png" slot="imgActive" alt=''>
@@ -31,7 +30,6 @@
          <div slot="barname">我的</div>
         </tab-bar-item>
      </tab-bar>
-</div>
 </template>
 
 <script>
