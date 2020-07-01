@@ -35,8 +35,8 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import TabBar from 'common/tab'
-import TabBarItem from 'common/tabbar-item'
+import TabBar from 'common/tabbar/tab'
+import TabBarItem from 'common/tabbar/tabbar-item'
 export default {
 //import引入的组件需要注入到对象中才能使用
 components: {

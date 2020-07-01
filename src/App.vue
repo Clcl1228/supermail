@@ -14,11 +14,12 @@
 </template>
 
 <script>
-import TabBarItem from 'content/MainTabBar'
+import TabBarItem from 'content/mainTabbar/MainTabBar'
+
 export default {
   name:'app',
   components:{
-    TabBarItem
+    TabBarItem,
     }
 }
 </script>
