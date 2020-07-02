@@ -15,12 +15,17 @@
 
 <script>
 import TabBarItem from 'content/mainTabbar/MainTabBar'
-
+import {getHomeMultidata} from 'network/axios.js'
 export default {
   name:'app',
   components:{
     TabBarItem,
-    }
+    },
+  created(){
+      getHomeMultidata().then((res)=>{
+
+      })
+  }
 }
 </script>
 
