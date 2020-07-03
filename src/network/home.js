@@ -1,7 +1,7 @@
-import {axiosRequest} from 'axios.js'
+import axios from './axios.js'
 
 export function getHomeMultidata(){
-    return axiosRequest({
+    return axios({
         url:'/home/multidata'
     })
 }
