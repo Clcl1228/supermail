@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-28 23:06:29
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-01 00:45:38
+ * @LastEditTime: 2020-07-03 23:48:59
 --> 
 <template>
   <div id="app">
@@ -14,21 +14,29 @@
 </template>
 
 <script>
-import TabBarItem from 'content/mainTabbar/MainTabBar'
-import {getHomeMultidata} from 'network/home.js'
+import TabBarItem from "content/mainTabbar/MainTabBar";
+
 export default {
-  name:'app',
-  components:{
-    TabBarItem,
-    },
-  created(){
-      getHomeMultidata().then(res=>{
-          console.log(res)
-      })
+  data() {
+    return {
+      // banners:null,
+      // recommends:null
+    };
+  },
+  name: "app",
+  components: {
+    TabBarItem
+  },
+  created() {
+    // getHomeMultidata().then(res=>{
+    //     this.banners=res.data.data.banner.list;
+    //     this.recommends=res.data.data.recommend.list;
+    //     console.log(res)
+    // })
   }
-}
+};
 </script>
 
-<style> 
+<style>
 @import url("assets/css/base.css");
 </style>
