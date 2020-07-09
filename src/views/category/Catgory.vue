@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-07-07 22:48:30
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-07 23:42:27
+ * @LastEditTime: 2020-07-09 22:15:51
 --> 
 <template>
   <div class="wrapper">
@@ -121,7 +121,17 @@ export default {
     return {};
   },
   mounted() {
-    new BScroll(document.querySelector(".wrapper"), {});
+    const bs = new BScroll(document.querySelector(".wrapper"), {
+      probeType: 3,
+      pullUpLoad: true
+    });
+    bs.on("scroll", po => {
+      console.log(po);
+    });
+    bs.on("pullingUp", () => {
+      console.log("上拉");
+      bs.finishPullUp();
+    });
   }
 };
 </script>

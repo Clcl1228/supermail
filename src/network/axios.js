@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-07-03 23:09:16
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-08 00:03:01
+ * @LastEditTime: 2020-07-09 23:59:17
  */
 import originAxios from 'axios'
 import qs from 'qs'
@@ -13,7 +13,7 @@ export default function axios(option) {
 	return new Promise((resolve, reject) => {
 		// 1.创建axios的实例
 		const instance = originAxios.create({
-			baseURL: '123/api/n3',
+			baseURL: 'http://152.136.185.210/api/n3',
 			timeout: 5000
 		});
 

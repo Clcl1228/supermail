@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-20 20:58:25
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-05 22:38:52
+ * @LastEditTime: 2020-07-09 23:53:01
 --> 
 <!--  -->
 <template>
@@ -12,11 +12,14 @@
     <nav-bar class="nav-bar">
       <div slot="news">购物广场</div>
     </nav-bar>
-    <home-swiper :banners="banners" />
-    <home-recommend :recommends="recommends" />
-    <feature-view></feature-view>
-    <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @typeclick="tabclick"></tab-control>
-    <good-list :goods="showType"></good-list>
+    <scroll class="content" ref="scroll">
+      <home-swiper :banners="banners" />
+      <home-recommend :recommends="recommends" />
+      <feature-view></feature-view>
+      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @typeclick="tabclick"></tab-control>
+      <good-list :goods="showType"></good-list>
+    </scroll>
+    <back-top @click.native="GoBackTop" />
   </div>
 </template>
 
@@ -24,6 +27,8 @@
 import NavBar from "common/navbar/topbar";
 import TabControl from "content/tabControl/TabControl";
 import GoodList from "content/goods/GoodList";
+import Scroll from "common/scroll/scroll";
+import BackTop from "content/backTop/backTop";
 
 import HomeSwiper from "./childHome/HomeSwiper";
 import HomeRecommend from "./childHome/HomeRecommendView";
@@ -37,7 +42,9 @@ export default {
     HomeSwiper,
     HomeRecommend,
     FeatureView,
-    GoodList
+    GoodList,
+    Scroll,
+    BackTop
   },
   data() {
     //这里存放数据
@@ -90,13 +97,17 @@ export default {
       getHomePopNewsSell(type, page).then(res => {
         this.goods[type].list.push(...res.data.data.list);
       });
+    },
+    GoBackTop() {
+      this.$refs.scroll.scrollTo(0, 0, 500);
     }
   }
 };
 </script>
-<style>
+<style scoped>
 #home {
   padding-top: 40px;
+  height: 100vh;
 }
 .nav-bar {
   background-color: var(--color-tint);
@@ -106,5 +117,10 @@ export default {
 .tab-control {
   position: sticky;
   top: 44px;
+}
+.content {
+  position: absolute;
+  top: 44px;
+  bottom: 70px;
 }
 </style>
