@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-07-09 22:41:43
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-07-12 23:25:16
+--> 
 
 <template>
   <div class="wrapper" ref="wrapper">
@@ -11,6 +19,16 @@
 import BScroll from "better-scroll";
 export default {
   components: {},
+  props: {
+    probeType: {
+      type: Number,
+      default: 1
+    },
+    proUpLoad: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     //这里存放数据
     return {
@@ -20,12 +38,22 @@ export default {
   mounted() {
     this.Scroll = new BScroll(this.$refs.wrapper, {
       click: true,
-      probeType: 3
+      probeType: this.probeType,
+      pullUpLoad: this.proUpLoad
+    });
+    this.Scroll.on("scroll", positon => {
+      this.$emit("scroll", positon);
+    });
+    this.Scroll.on("pullingUp", () => {
+      this.$emit("loadup");
     });
   },
   methods: {
     scrollTo(x, y, time = 300) {
       this.Scroll.scrollTo(x, y, time);
+    },
+    finishPullUp() {
+      this.Scroll.finishPullUp();
     }
   }
 };

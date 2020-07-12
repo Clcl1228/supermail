@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-20 20:58:25
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-09 23:53:01
+ * @LastEditTime: 2020-07-12 23:29:15
 --> 
 <!--  -->
 <template>
@@ -12,14 +12,21 @@
     <nav-bar class="nav-bar">
       <div slot="news">购物广场</div>
     </nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll
+      :probeType="3"
+      class="content"
+      ref="scroll"
+      @scroll="scrollClick"
+      :pro-up-load="true"
+      @loadup="loadingUp"
+    >
       <home-swiper :banners="banners" />
       <home-recommend :recommends="recommends" />
       <feature-view></feature-view>
       <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @typeclick="tabclick"></tab-control>
       <good-list :goods="showType"></good-list>
     </scroll>
-    <back-top @click.native="GoBackTop" />
+    <back-top @click.native="GoBackTop" v-show="isShowBackTop" />
   </div>
 </template>
 
@@ -56,7 +63,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      type: "pop"
+      type: "pop",
+      isShowBackTop: false
     };
   },
   created() {
@@ -85,6 +93,11 @@ export default {
           break;
       }
     },
+    loadingUp() {
+      this.getHomePopNewsSell1(this.type);
+
+      this.$refs.scroll.Scroll.refresh();
+    },
     //网络请求
     getHomeMultidata1() {
       getHomeMultidata().then(res => {
@@ -96,10 +109,19 @@ export default {
       const page = this.goods[type].page + 1;
       getHomePopNewsSell(type, page).then(res => {
         this.goods[type].list.push(...res.data.data.list);
+        this.goods[type].page += 1;
+        this.$refs.scroll.Scroll.finishPullUp();
       });
     },
     GoBackTop() {
       this.$refs.scroll.scrollTo(0, 0, 500);
+    },
+    scrollClick(position) {
+      if (-position.y > 1000) {
+        this.isShowBackTop = true;
+      } else {
+        this.isShowBackTop = false;
+      }
     }
   }
 };
