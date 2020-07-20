@@ -4,11 +4,13 @@
  * @Author: sueRimn
  * @Date: 2020-06-28 23:06:29
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-03 23:48:59
+ * @LastEditTime: 2020-07-20 23:42:23
 --> 
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <tab-bar-item></tab-bar-item>
   </div>
 </template>

@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-07-09 22:41:43
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-12 23:25:16
+ * @LastEditTime: 2020-07-16 21:03:41
 --> 
 
 <template>
@@ -47,6 +47,7 @@ export default {
     this.Scroll.on("pullingUp", () => {
       this.$emit("loadup");
     });
+    console.log(this.Scroll);
   },
   methods: {
     scrollTo(x, y, time = 300) {

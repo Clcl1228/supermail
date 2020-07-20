@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-20 20:58:25
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-12 23:29:15
+ * @LastEditTime: 2020-07-20 23:37:48
 --> 
 <!--  -->
 <template>
@@ -12,6 +12,13 @@
     <nav-bar class="nav-bar">
       <div slot="news">购物广场</div>
     </nav-bar>
+    <tab-control
+      :titles="['流行', '新款', '精选']"
+      class="tab-control"
+      @typeclick="tabclick"
+      ref="tabControl1"
+      v-show="istabfix"
+    ></tab-control>
     <scroll
       :probeType="3"
       class="content"
@@ -20,10 +27,15 @@
       :pro-up-load="true"
       @loadup="loadingUp"
     >
-      <home-swiper :banners="banners" />
+      <home-swiper :banners="banners" @swiperImgLoad="swiperLoad" />
       <home-recommend :recommends="recommends" />
       <feature-view></feature-view>
-      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @typeclick="tabclick"></tab-control>
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        class="tab-control"
+        @typeclick="tabclick"
+        ref="tabControl2"
+      ></tab-control>
       <good-list :goods="showType"></good-list>
     </scroll>
     <back-top @click.native="GoBackTop" v-show="isShowBackTop" />
@@ -64,14 +76,25 @@ export default {
         sell: { page: 0, list: [] }
       },
       type: "pop",
-      isShowBackTop: false
+      isShowBackTop: false,
+      taboffsetTop: "",
+      istabfix: false
     };
+  },
+  mounted() {
+    // this.$bus.$on("itemImageload", () => {
+    //   debounce(this.$refs.scroll.Scroll.refresh, 500);
+    // });
+    //this.taboffsetTop = this.$refs.tabControl.$el.offsetTop;
   },
   created() {
     this.getHomeMultidata1();
     this.getHomePopNewsSell1("pop");
     this.getHomePopNewsSell1("new");
     this.getHomePopNewsSell1("sell");
+    // this.$bus.$on("itemImageload", () => {
+    //   this.$refs.scroll.Scroll.refresh();
+    // });
   },
   computed: {
     showType() {
@@ -79,6 +102,19 @@ export default {
     }
   },
   methods: {
+    swiperLoad() {
+      this.taboffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      //console.log(this.$refs.tabControl.$el.offsetTop);
+    },
+    debounce(func, delay) {
+      let timer = null;
+      return function(...args) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    },
     //时间监听
     tabclick(index) {
       switch (index) {
@@ -92,6 +128,8 @@ export default {
           this.type = "sell";
           break;
       }
+      this.$refs.tabControl2.currectIndex = index;
+      this.$refs.tabControl1.currectIndex = index;
     },
     loadingUp() {
       this.getHomePopNewsSell1(this.type);
@@ -122,6 +160,8 @@ export default {
       } else {
         this.isShowBackTop = false;
       }
+
+      this.istabfix = -position.y > this.taboffsetTop;
     }
   }
 };
@@ -135,6 +175,7 @@ export default {
   background-color: var(--color-tint);
   font-weight: 700;
   color: #fff;
+  position: fixed;
 }
 .tab-control {
   position: sticky;
@@ -144,5 +185,11 @@ export default {
   position: absolute;
   top: 44px;
   bottom: 70px;
+}
+.fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 44px;
 }
 </style>

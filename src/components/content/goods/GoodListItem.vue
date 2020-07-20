@@ -4,12 +4,12 @@
  * @Author: sueRimn
  * @Date: 2020-07-05 21:06:02
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-05 22:16:47
+ * @LastEditTime: 2020-07-21 00:02:06
 --> 
 
 <template>
-  <div class="goods-item">
-    <img :src="img.show.img" alt />
+  <div class="goods-item" @click="gooditemClick">
+    <img :src="img.show.img" alt @load="imageload" />
     <div class="goods-info">
       <p>{{img.title}}</p>
       <span class="price">{{img.price}}</span>
@@ -30,6 +30,15 @@ export default {
       default() {
         return [];
       }
+    }
+  },
+  methods: {
+    imageload() {
+      //console.log("2222");
+      this.$bus.$emit("itemImageload");
+    },
+    gooditemClick() {
+      this.$router.push("/detail/" + this.img.iid);
     }
   }
 };
