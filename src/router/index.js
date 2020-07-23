@@ -40,7 +40,7 @@ const routes = [
     component: Cars
   },
   {
-    path: '/detail:iid',
+    path: '/detail/:iid',
     component: Detail
   }
 ]

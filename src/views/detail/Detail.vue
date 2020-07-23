@@ -7,12 +7,17 @@
  * @LastEditTime: 2020-07-21 00:11:22
 --> 
 <template>
-  <div>{{myImgId}}222</div>
+  <div id='detail'>
+    <detail-nav-bar></detail-nav-bar>
+  </div>
 </template>
 
 <script>
+import DetailNavBar from './childComponents/DetailNavBar'
 export default {
-  components: {},
+  components: {
+    DetailNavBar
+  },
   props: {},
   data() {
     return {
@@ -20,7 +25,6 @@ export default {
     };
   },
   created() {
-    console.log(123);
     this.myImgId = this.$route.params.iid;
   }
 };

@@ -38,8 +38,10 @@ export default {
       this.$bus.$emit("itemImageload");
     },
     gooditemClick() {
-      this.$router.push("/detail/" + this.img.iid);
-    }
+      //console.log(this.$router)
+      this.$router.push("/detail/"+this.img.iid);
+    },
+    
   }
 };
 </script>
