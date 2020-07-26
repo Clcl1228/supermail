@@ -4,11 +4,11 @@
  * @Author: sueRimn
  * @Date: 2020-06-28 23:06:29
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-20 23:42:23
+ * @LastEditTime: 2020-07-26 21:27:01
 --> 
 <template>
   <div id="app">
-    <keep-alive>
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
     <tab-bar-item></tab-bar-item>
@@ -27,7 +27,7 @@ export default {
   },
   name: "app",
   components: {
-    TabBarItem
+    TabBarItem,
   },
   created() {
     // getHomeMultidata().then(res=>{
@@ -35,7 +35,7 @@ export default {
     //     this.recommends=res.data.data.recommend.list;
     //     console.log(res)
     // })
-  }
+  },
 };
 </script>
 
