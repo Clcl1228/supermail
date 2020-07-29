@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-07-26 20:32:33
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-26 22:02:59
+ * @LastEditTime: 2020-07-27 23:42:17
  */
 import axios from './axios'
 export function getDetail(iid) {
@@ -37,5 +37,14 @@ export class Shop {
         this.sells = shopInfo.cSells;
         this.score = shopInfo.score;
         this.goodsCount = shopInfo.cGoods
+    }
+}
+
+export class GoodsParam {
+    constructor(info, rule) {
+        // 注: images可能没有值(某些商品有值, 某些没有值)
+        this.image = info.images ? info.images[0] : '';
+        this.infos = info.set;
+        this.sizes = rule.tables;
     }
 }
