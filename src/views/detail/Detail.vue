@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-07-20 23:55:46
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-07-27 23:58:15
+ * @LastEditTime: 2020-08-02 16:41:04
 --> 
 <template>
   <div id="details">
@@ -15,6 +15,7 @@
       <shop-info :shop="shop"></shop-info>
       <goods-info :detail-info="detailInfo"></goods-info>
       <param-info :paramInfo="goodsPrams"></param-info>
+      <detail-com-info :commentInfo="rateInfos"></detail-com-info>
     </scroll>
   </div>
 </template>
@@ -28,6 +29,7 @@ import ShopInfo from "./childComponents/DetailShopInfo";
 import Scroll from "components/common/scroll/scroll";
 import GoodsInfo from "./childComponents/DetailGoodsInfo";
 import ParamInfo from "./childComponents/DetailParamInfo";
+import DetailComInfo from "./childComponents/DeatailComInfo";
 export default {
   name: "Detail",
   components: {
@@ -38,6 +40,7 @@ export default {
     Scroll,
     GoodsInfo,
     ParamInfo,
+    DetailComInfo,
   },
   props: {},
   data() {
@@ -48,6 +51,7 @@ export default {
       goods: {},
       detailInfo: {},
       goodsPrams: {},
+      rateInfos: {},
     };
   },
   created() {
@@ -68,6 +72,9 @@ export default {
         data.itemParams.info,
         data.itemParams.rule
       );
+      if (data.rate.cRate !== 0) {
+        this.rateInfos = data.rate.list[0];
+      }
     });
   },
 };
